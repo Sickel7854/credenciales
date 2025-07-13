@@ -1,0 +1,18 @@
+{
+  "001": {
+    "nombre": "Ana María López",
+    "ci": "12345678",
+    "cargo": "Supervisora de Producción",
+    "foto": "https://sickel7854.github.io/credenciales/fotos/ana.jpg",
+    "telefono": "789-12345",
+    "estado": "válida"
+  },
+  "002": {
+    "nombre": "Jorge Ríos",
+    "ci": "98765432",
+    "cargo": "Técnico de Campo",
+    "foto": "https://sickel7854.github.io/credenciales/fotos/jorge.jpg",
+    "telefono": "765-43210",
+    "estado": "válida"
+  }
+}
