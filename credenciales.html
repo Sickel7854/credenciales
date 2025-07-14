@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verificación de Credencial</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+      padding: 2rem;
+    }
+    .card {
+      max-width: 400px;
+      margin: auto;
+      background: #6a0dad; /* morado */
+      color: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 3px solid white;
+    }
+    .valid {
+      color: #00ff88;
+      font-weight: bold;
+    }
+    .invalid {
+      color: #ff6961;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div id="resultado" class="card">
+  <h2>Verificando credencial...</h2>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  const contenedor = document.getElementById("resultado");
+
+  fetch("personas.json")
+    .then(response => response.json())
+    .then(personas => {
+      if (personas[id]) {
+        const p = personas[id];
+        contenedor.innerHTML = `
+          <img src="${p.foto}" alt="Foto de ${p.nombre}" />
+          <h2>${p.nombre}</h2>
+          <p><strong>CI:</strong> ${p.ci}</p>
+          <p><strong>Cargo:</strong> ${p.cargo}</p>
+          <p><strong>Teléfono:</strong> ${p.telefono}</p>
+          <p class="valid">Credencial VÁLIDA</p>
+        `;
+      } else {
+        contenedor.innerHTML = `
+          <h2>Credencial no encontrada</h2>
+          <p class="invalid">ID: ${id}</p>
+        `;
+      }
+    })
+    .catch(error => {
+      contenedor.innerHTML = `
+        <h2>Error al cargar la base de datos</h2>
+        <p class="invalid">${error}</p>
+      `;
+    });
+</script>
+
+</body>
+</html>
